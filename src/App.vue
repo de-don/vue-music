@@ -1,13 +1,44 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Music Store</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+             <router-link :to="{name: 'Login'}" class="nav-link">LogIn</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{name: 'Dashboard'}" class="nav-link">Tracks</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main">
+      <div class="container">
+        <router-view/>
+        <hr>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data: function () {
+    return {
+      token: ''
+    }
+  },
+  provide: {
+    token: 'token'
+  }
 }
 </script>
 
