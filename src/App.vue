@@ -33,11 +33,18 @@ export default {
   name: 'App',
   data: function () {
     return {
-      token: ''
+      token: '',
+      api_url: 'http://0.0.0.0:8000/api/v1/'
     }
   },
   provide: {
-    token: 'token'
+    token: this.token,
+    api_url: 'http://0.0.0.0:8000/api/v1/'
+  },
+  methods: {
+    authenticated: function (token) {
+      this.token = token
+    }
   }
 }
 </script>

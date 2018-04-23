@@ -11,19 +11,13 @@
 </template>
 
 <script>
+import config from '@/config'
 import axios from 'axios'
 
 export default {
-
-  inject: ['token'],
   data () {
     return {
       tracks: []
-    }
-  },
-  watch:{
-    $route (to, from){
-        alert(to + '___' + from)
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -31,15 +25,11 @@ export default {
       vm.get_tracks()
     })
   },
-
   methods: {
     get_tracks: function () {
+      let url = config.api.url + 'music_store/tracks/'
       axios
-        .get('http://0.0.0.0:8000/api/v1/music_store/tracks/', {
-          headers: {
-            Authorization: 'Token: ' + this.token
-          }
-        })
+        .get(url, {})
         .then(
           response => {
             this.tracks = response.data

@@ -11,51 +11,23 @@
       </label>
     </div>
 
-    <button class="btn btn-lg btn-primary btn-block" @click="login">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" @click="sendRequest">Sign in</button>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import router from '@/router'
+import AuthService from '@/services/AuthService'
 
 export default {
-
-  inject: ['token'],
   data () {
     return {
       email: '',
-      password: '',
-      data: '',
-      response: '',
-      key: ''
-    }
-  },
-  beforeCreate: function () {
-    if (this.token) {
-      router.push('Dashboard')
+      password: ''
     }
   },
   methods: {
-    login: function () {
-      axios
-        .post('http://0.0.0.0:8000/api/v1/auth/login/', {
-          email: this.email,
-          password: this.password
-        })
-        .then(
-          response => {
-            this.response = response
-            this.data = response.data
-            this.token = response.data.key
-
-            // redirect on dashboard
-            router.push('Dashboard')
-          },
-          error => {
-            this.response = error
-          }
-        )
+    sendRequest () {
+      AuthService.login(this.email, this.password)
     }
   }
 }
