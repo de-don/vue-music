@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import AuthService from '@/services/AuthService'
 import {authActions} from '../resources'
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
 
 /**
  * Set Authorization header.
  */
 Vue.http.interceptors.push((request, next) => {
   if (AuthService.isAuthenticated()) {
-    request.headers.set('Authorization', `Bearer ${AuthService.getToken()}`)
+    request.headers.set('Authorization', `Token ${AuthService.getToken()}`)
   }
   next()
 })
